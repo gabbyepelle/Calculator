@@ -36,9 +36,6 @@ const equals = document.querySelector('#equals');
 
 
 
-
-
-
 let num1 = 0;
 let operator = "";
 let num2 = 0;
@@ -128,19 +125,10 @@ addition.addEventListener('click', ()=>{
        }
        operator = add;
        displayVar = "";
-    console.log(`displayVar: ${displayVar}`)
-    console.log(`num1 : ${num1}`)
-    console.log(`num2 : ${num2}`)
-    console.log(`res: ${res}`)
-    console.log(`operand: ${operator}`)
 })
 
 subtraction.addEventListener('click', ()=>{
-    //needs to also negate a value
-    console.log(`num1 :${num1}`)
-    console.log(`num2 :${num1}`)
-    console.log(`displayVar: ${displayVar}`)
-    if(!displayVar){
+    if(!displayVar){//negates a value 
         if(displayVar[0] !== '-'){
             displayVar = '-' + displayVar;
         }else{
@@ -162,7 +150,6 @@ subtraction.addEventListener('click', ()=>{
             display.textContent = displayVar;
            }
         num1 = parseFloat(displayVar);
-        // console.log(num1);
         operator = subtract;
         displayVar = "";
     }
@@ -205,7 +192,6 @@ subtraction.addEventListener('click', ()=>{
         display.textContent = displayVar;
        }
     num1 = parseFloat(displayVar);
-    // console.log(num1);
     operator = divide;
     displayVar = "";
     
@@ -222,12 +208,43 @@ equals.addEventListener('click', ()=>{
     }
     displayVar = res;
 
+
     display.textContent = displayVar;
     num1=0;
     num2=0; 
     operator =""
-    console.log(`equals: ${res}`)
-    console.log(typeof(res))
 })
 
 
+//adding keyboard support
+
+const digits = "123456789";
+
+document.addEventListener('keydown', (e)=>{
+    if(digits.includes(e.key)){
+        if(typeof(displayVar) === 'number'){//clears out display once calculation is performed
+            displayVar = e.key
+            display.textContent = displayVar;
+        }else{
+            if(displayVar.length < 16){
+                displayVar += e.key
+                display.textContent = displayVar;
+            }
+        }
+    }else if(e.key === "Enter" || e.key === "=" ){
+       equals.click()
+    }else if(e.key === "+"){
+        addition.click()
+    }else if(e.key === "-"){
+        subtraction.click()
+    }else if(e.key === "*"){
+        multiplication.click()
+    }else if(e.key === "/"){
+        division.click()
+    }else if(e.key === "."){
+        decimal.click()
+    }else if(e.key === "%"){
+        percent.click()
+    }
+
+})
