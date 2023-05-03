@@ -128,14 +128,6 @@ addition.addEventListener('click', ()=>{
 })
 
 subtraction.addEventListener('click', ()=>{
-    if(!displayVar){//negates a value 
-        if(displayVar[0] !== '-'){
-            displayVar = '-' + displayVar;
-        }else{
-            displayVar = displayVar.slice(1);
-            }
-        display.textContent = displayVar;
-    }else{
         if(operator){
             if(displayVar){
                 num2 = parseFloat(displayVar)
@@ -152,7 +144,7 @@ subtraction.addEventListener('click', ()=>{
         num1 = parseFloat(displayVar);
         operator = subtract;
         displayVar = "";
-    }
+
  })
 
  multiplication.addEventListener('click', ()=>{
@@ -218,13 +210,14 @@ equals.addEventListener('click', ()=>{
 
 //adding keyboard support
 
-const digits = "123456789";
+const digits = "0123456789";
 
 document.addEventListener('keydown', (e)=>{
     if(digits.includes(e.key)){
         if(typeof(displayVar) === 'number'){//clears out display once calculation is performed
             displayVar = e.key
             display.textContent = displayVar;
+           
         }else{
             if(displayVar.length < 16){
                 displayVar += e.key
